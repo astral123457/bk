@@ -12,7 +12,31 @@ commands:
   vip:
     description: Comando para VIPs
     permission: vip.use
+  Emanuel:
+    description: Comando para VIPs
+    permission: Emanuel.use
+  Lilith:
+    description: Comando para VIPs
+    permission: Lilith.use
+  Eva:
+    description: Comando para VIPs
+    permission: Eva.use
+  Adan:
+    description: Comando para VIPs
+    permission: Adan.use
 permissions:
   vip.use:
+    description: Permite o uso do comando VIP
+    default: op
+  Emanuel.use:
+    description: Permite o uso do comando VIP
+    default: op
+  Lilith:
+    description: Permite o uso do comando VIP
+    default: op
+  Eva.use:
+    description: Permite o uso do comando VIP
+    default: op
+  Adan.use:
     description: Permite o uso do comando VIP
     default: op
