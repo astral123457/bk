@@ -1,7 +1,7 @@
 name: bk
-version: '1.1'
+version: '1.2'
 main: com.guia.bk.Bk
-api-version: '1.21'
+api-version: '1.20'
 prefix: Annabel369
 authors: [ AmauriBuenoDosSantos ]
 description: oi voce escreve oi e recebe um kit basico, vip para vip
@@ -10,33 +10,32 @@ commands:
   oi:
     description: Diz 'bem vindo'
   vip:
-    description: Comando para VIPs
+    description: Kit Bk Basic Kit para VIPs
     permission: vip.use
-  Emanuel:
-    description: Comando para VIPs
-    permission: Emanuel.use
-  Lilith:
-    description: Comando para VIPs
-    permission: Lilith.use
-  Eva:
-    description: Comando para VIPs
-    permission: Eva.use
-  Adan:
-    description: Comando para VIPs
-    permission: Adan.use
-permissions:
-  vip.use:
-    description: Permite o uso do comando VIP
-    default: op
-  Emanuel.use:
-    description: Permite o uso do comando VIP
-    default: op
-  Lilith:
-    description: Permite o uso do comando VIP
-    default: op
-  Eva.use:
-    description: Permite o uso do comando VIP
-    default: op
-  Adan.use:
-    description: Permite o uso do comando VIP
-    default: op
+  addvip:
+    description: Concede status de VIP a um jogador.
+    usage: /addvip <nome_do_jogador>
+    permission: vip.add
+  rmvip:
+    description: Remove o status de VIP de um jogador.
+    usage: /rmvip <nome_do_jogador>
+    permission: vip.add
+  emanuel:
+    description: Kit Emanuel para VIPs
+    permission: vip.use
+  lilith:
+    description: Kit Lilith para VIPs
+    permission: vip.use
+  eva:
+    description: Kit Eva para VIPs
+    permission: vip.use
+  adan:
+    description: Kit Adan para VIPs
+    permission: vip.use
+
+  limpar:
+    description: utilizar o método clear() do PlayerInventory
+    permission: vip.use
+
+
+
