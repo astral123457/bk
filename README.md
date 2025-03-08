@@ -7,7 +7,7 @@ Dependence https://luckperms.net/download ( mas ele funciona sem isto e para reg
                 /vip
                 /addvip <name>
                 /rmvip <name>
-                /emanuel (kit Stve mesianico para apocalipce)
+                /emanuel (kit Steve Messianic para apocalipce)
                 /lilith (kit bruxa para apocalipce)
                 /eva (kit rainha do mar apocalipce)
                 /adan (kit escravo da terra)
