@@ -1,5 +1,7 @@
 # Bk Kit básico de alimentação no inicio do Minecraft
 
+# Version java spigot 1.20 a 1.21.x
+
 Dependence https://luckperms.net/download ( mas ele funciona sem isto e para registra com perfeicao )
 
         Command: 
