@@ -19,20 +19,45 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.UUID;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public final class Bk extends JavaPlugin implements Listener {
 
-    private static final String DB_URL = "jdbc:sqlite:minecraft_spigot.db";
+    private static final String DB_URL = "jdbc:sqlite:plugins/bk/bk.db";
+    private static final String FOLDER_PATH = "plugins/bk";
+    private static final String CONFIG_FILE = FOLDER_PATH + "/config.json";
+    private static final String MESSAGES_FILE_PATH = FOLDER_PATH + "/messages.json";
 
     @Override
     public void onEnable() {
         // Mensagem no console para indicar ativação
         getLogger().info("Bk plugin habilitado!");
 
+        createFolderAndConfig();
+        boolean isEnabled = loadPluginStatus();
+
+        if (!isEnabled) {
+            getLogger().warning("Plugin desativado via configuração.");
+            getServer().getPluginManager().disablePlugin(this);
+            return; // Finaliza a inicialização se o plugin estiver desativado
+        }
+
         // Registrar eventos
         getServer().getPluginManager().registerEvents(this, this);
 
         // Configurar banco de dados
         setupDatabase();
+
+        // Carregar idioma
+        String language = loadLanguage();
+        getLogger().info("Idioma configurado: " + language);
 
         // Registrar comandos
         getCommand("oi").setExecutor(this);
@@ -47,7 +72,10 @@ public final class Bk extends JavaPlugin implements Listener {
 
         getCommand("limpar").setExecutor(this);
 
+
     }
+
+
 
 
     @Override
@@ -61,14 +89,26 @@ public final class Bk extends JavaPlugin implements Listener {
     int contador = 0;
 
     public void adicionarItem(Player player) {
+        // Carregar o idioma configurado
+        String language = loadLanguage();
+
+        // Carregar mensagens
+        MessageManager messageManager = new MessageManager();
+
         if (contador < 3) {
             player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 1));
             player.getInventory().addItem(new ItemStack(Material.BREAD, 1));
             player.getInventory().addItem(new ItemStack(Material.APPLE, 1));
 
             contador++;
-            player.sendMessage(ChatColor.GREEN + "Você recebeu um hambúrguer durante o dia de hoje! (" + contador + "/3)");
+            player.sendMessage( "Você recebeu um hambúrguer durante o dia de hoje! (" + contador + "/3)");
+            String message = messageManager.getMessage("burguer_1", language);
+            player.sendMessage(ChatColor.GREEN + message + contador + "/3)");
         } else {
+
+            String message = messageManager.getMessage("burguer_2", language);
+            player.sendMessage(ChatColor.RED + message);
+
             player.sendMessage(ChatColor.RED + "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
         }
     }
@@ -484,5 +524,93 @@ public final class Bk extends JavaPlugin implements Listener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void createFolderAndConfig() {
+        // Criar a pasta blockdata, se não existir
+        File folder = new File(FOLDER_PATH);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        // Criar o arquivo config.json com configuração padrão
+        File configFile = new File(CONFIG_FILE);
+        if (!configFile.exists()) {
+            JsonObject defaultConfig = new JsonObject();
+            defaultConfig.addProperty("enabled", true);
+            defaultConfig.addProperty("language", "br"); // Adiciona o idioma padrão
+
+            try (FileWriter writer = new FileWriter(configFile)) {
+                Gson gson = new Gson();
+                gson.toJson(defaultConfig, writer);
+                getLogger().info("Arquivo config.json criado com configuração padrão.");
+            } catch (IOException e) {
+                getLogger().severe("Erro ao criar o arquivo config.json: " + e.getMessage());
+            }
+        }
+
+        // Criar o arquivo messages.json com mensagens padrão, apenas se não existir
+        File messagesFile = new File(MESSAGES_FILE_PATH);
+        if (!messagesFile.exists()) {
+            JsonObject messages = new JsonObject();
+
+            JsonObject lockChestMessages = new JsonObject();
+            lockChestMessages.addProperty("en", "You received a burger during the day today! (");
+            lockChestMessages.addProperty("es", "¡Recibiste una hamburguesa hoy! (");
+            lockChestMessages.addProperty("ru", "Сегодня вы получили бургер! (");
+            lockChestMessages.addProperty("he", "קיבלת היום המבורגר! (");
+            lockChestMessages.addProperty("ch", "今天你收到一個漢堡了！ (");
+            lockChestMessages.addProperty("ar", "لقد تلقيت برجر اليوم! (");
+            lockChestMessages.addProperty("gr", "Έλαβες ένα μπέργκερ σήμερα! (");
+            lockChestMessages.addProperty("br", "Você recebeu um hambúrguer durante o dia de hoje! (");
+
+            JsonObject unlockChestMessages = new JsonObject();
+            unlockChestMessages.addProperty("en", "You have already received the maximum number of burgers allowed for today.");
+            unlockChestMessages.addProperty("es", "Ya has recibido el número máximo de hamburguesas permitidas hoy.");
+            unlockChestMessages.addProperty("ru", "Вы уже получили максимально разрешенное сегодня количество гамбургеров.");
+            unlockChestMessages.addProperty("he", "כבר קיבלת את מספר ההמבורגרים המרבי המותר היום.");
+            unlockChestMessages.addProperty("ch", "您今天已經收到了允許的最大數量的漢堡。");
+            unlockChestMessages.addProperty("ar", "لقد تلقيت بالفعل الحد الأقصى لعدد البرغر المسموح به اليوم.");
+            unlockChestMessages.addProperty("gr", "Έχετε ήδη λάβει τον μέγιστο επιτρεπόμενο αριθμό μπέργκερ σήμερα.");
+            unlockChestMessages.addProperty("br", "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
+
+            messages.add("burguer_1", lockChestMessages);
+            messages.add("burguer_2", unlockChestMessages);
+
+            try (FileWriter writer = new FileWriter(messagesFile)) {
+                Gson gson = new Gson();
+                gson.toJson(messages, writer);
+                getLogger().info("Arquivo messages.json criado com mensagens padrão.");
+            } catch (IOException e) {
+                getLogger().severe("Erro ao criar o arquivo messages.json: " + e.getMessage());
+            }
+        }
+    }
+
+
+    private boolean loadPluginStatus() {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)));
+            JsonObject config = new Gson().fromJson(content, JsonObject.class);
+            return config.get("enabled").getAsBoolean();
+        } catch (IOException e) {
+            getLogger().severe("Erro ao ler o arquivo config.json: " + e.getMessage());
+        }
+        return false; // Desabilita o plugin em caso de erro
+    }
+
+    public String loadLanguage() {
+        File configFile = new File(CONFIG_FILE);
+        if (configFile.exists()) {
+            try {
+                String content = new String(Files.readAllBytes(Paths.get(CONFIG_FILE)));
+                JsonObject config = new Gson().fromJson(content, JsonObject.class);
+                return config.get("language").getAsString(); // Retorna o idioma configurado
+            } catch (IOException e) {
+                getLogger().severe("Erro ao ler o arquivo config.json: " + e.getMessage());
+            }
+        }
+        return "br"; // Padrão para português, caso ocorra um erro
     }
 }
