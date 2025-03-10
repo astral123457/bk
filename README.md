@@ -13,10 +13,11 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
 # Testamento de Zeus aos 4
 
-XAΓ O Chi Rho é formado pela combinação das duas primeiras letras da palavra grega Christos, que significa "Cristo".  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante
+XAΓ O Chi Rho é formado pela combinação das duas primeiras letras da palavra grega Christos, 
+que significa "Cristo".  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante
 
 
-ΘΕ consciência emocional é pequena e leva a Morte (LILITH)
+ΘΕ Consciência emocional é pequena e leva a Morte (LILITH)
 
 
 ΔΙ LAtino Pequeno (Homen Barro Adão)
