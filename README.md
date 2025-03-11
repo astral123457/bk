@@ -1,4 +1,4 @@
-# bk Kit básico de alimentação no inicio do Minecraft
+# BK Kit básico de alimentação no inicio do Minecraft
 
 Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
