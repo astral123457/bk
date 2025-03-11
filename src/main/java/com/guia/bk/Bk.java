@@ -1,5 +1,6 @@
 package com.guia.bk;
 
+import com.google.gson.GsonBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -17,7 +18,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.UUID;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -101,28 +102,31 @@ public final class Bk extends JavaPlugin implements Listener {
             player.getInventory().addItem(new ItemStack(Material.APPLE, 1));
 
             contador++;
-            player.sendMessage( "Você recebeu um hambúrguer durante o dia de hoje! (" + contador + "/3)");
-            String message = messageManager.getMessage("burguer_1", language);
-            player.sendMessage(ChatColor.GREEN + message + contador + "/3)");
+            // Busca a mensagem traduzida
+            String message = messageManager.getMessage("burguer_1", language, "contador", String.valueOf(contador));
+            player.sendMessage(ChatColor.GREEN + message + " (" + contador + "/3)");
         } else {
-
+            // Busca a mensagem traduzida
             String message = messageManager.getMessage("burguer_2", language);
             player.sendMessage(ChatColor.RED + message);
-
-            player.sendMessage(ChatColor.RED + "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
         }
     }
 
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String language = loadLanguage(); // Carrega o idioma configurado
+        MessageManager messageManager = new MessageManager(); // Gerenciador de mensagens
+
         if (command.getName().equalsIgnoreCase("oi")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 String playerName = player.getName();
 
                 if (!hasReceivedKit(playerName)) {
-                    sender.sendMessage(ChatColor.LIGHT_PURPLE + "Bem vindo, " + playerName + "!");
-                    sender.sendMessage(ChatColor.GREEN + "Você acaba de receber um kit de sobrevivência básico!");
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE +
+                            messageManager.getMessage("welcome", language, "playerName", playerName));
+                    sender.sendMessage(ChatColor.GREEN + messageManager.getMessage("kit_received", language));
 
                     // Dando o kit ao jogador
                     player.getInventory().addItem(new ItemStack(Material.TORCH, 13));
@@ -131,17 +135,16 @@ public final class Bk extends JavaPlugin implements Listener {
                     player.getInventory().addItem(new ItemStack(Material.APPLE, 2));
                     player.getInventory().addItem(new ItemStack(Material.CHERRY_WOOD, 36));
 
-
                     markKitReceived(playerName);
                 } else {
-                    sender.sendMessage(ChatColor.LIGHT_PURPLE + "Bem vindo de volta, " + playerName + "!");
-                    sender.sendMessage(ChatColor.GREEN + "Você já recebeu seu kit!");
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE +
+                            messageManager.getMessage("welcome_back", language, "playerName", playerName));
+                    sender.sendMessage(ChatColor.GREEN + messageManager.getMessage("kit_already_received", language));
                     adicionarItem(player);
                 }
-
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(messageManager.getMessage("player_only_command", language));
                 return true;
             }
         }
@@ -152,22 +155,26 @@ public final class Bk extends JavaPlugin implements Listener {
                     String targetPlayerName = args[0];
                     Player targetPlayer = getServer().getPlayer(targetPlayerName);
 
-                    // Executa o comando no console para adicionar VIP
                     getServer().dispatchCommand(getServer().getConsoleSender(),
                             "lp user " + targetPlayerName + " permission set vip.use true");
 
                     if (targetPlayer != null) {
                         addVipToDatabase(targetPlayerName);
-                        sender.sendMessage(ChatColor.GREEN + "O jogador " + targetPlayerName + " agora é um VIP!");
-                        targetPlayer.sendMessage(ChatColor.GOLD + "Parabéns, você recebeu o status de VIP!");
+                        sender.sendMessage(ChatColor.GREEN +
+                                messageManager.getMessage("player_vip", language, "targetPlayerName", targetPlayerName));
+                        targetPlayer.sendMessage(ChatColor.GOLD +
+                                messageManager.getMessage("vip_congrats", language));
                     } else {
-                        sender.sendMessage(ChatColor.RED + "Jogador não encontrado.");
+                        sender.sendMessage(ChatColor.RED +
+                                messageManager.getMessage("player_not_found", language));
                     }
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Uso correto: /addvip <nome_do_jogador>");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("addvip_usage", language));
                 }
             } else {
-                sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                sender.sendMessage(ChatColor.RED +
+                        messageManager.getMessage("no_permission", language));
             }
             return true;
         }
@@ -177,19 +184,22 @@ public final class Bk extends JavaPlugin implements Listener {
                 if (args.length == 1) {
                     String targetPlayerName = args[0];
                     if (removeVipFromDatabase(targetPlayerName)) {
-                        // Executa o comando no console para remover VIP
                         getServer().dispatchCommand(getServer().getConsoleSender(),
                                 "lp user " + targetPlayerName + " permission unset vip.use");
 
-                        sender.sendMessage(ChatColor.GREEN + "O jogador " + targetPlayerName + " não é mais VIP.");
+                        sender.sendMessage(ChatColor.GREEN +
+                                messageManager.getMessage("remove_vip", language, "targetPlayerName", targetPlayerName));
                     } else {
-                        sender.sendMessage(ChatColor.RED + "O jogador " + targetPlayerName + " não foi encontrado como VIP.");
+                        sender.sendMessage(ChatColor.RED +
+                                messageManager.getMessage("not_found_vip", language, "targetPlayerName", targetPlayerName));
                     }
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Uso correto: /rmvip <nome_do_jogador>");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("removevip_usage", language));
                 }
             } else {
-                sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                sender.sendMessage(ChatColor.RED +
+                        messageManager.getMessage("no_permission", language));
             }
             return true;
         }
@@ -198,7 +208,7 @@ public final class Bk extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.GOLD + "XAΓ, Cristo  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante!");
+                    sender.sendMessage(ChatColor.AQUA +messageManager.getMessage("emanuel_comando", language));
                     // Adicionando itens VIP ao jogador
 
                     player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));
@@ -237,9 +247,6 @@ public final class Bk extends JavaPlugin implements Listener {
                     // Adicionar os itens ao inventário do jogador
                     player.getInventory().addItem(helmet, chestplate, leggings, boots);
 
-                    player.sendMessage("Você recebeu uma armadura completa de Netherite encantada!");
-
-
                     // Criar a Shulker Box cheia de diamantes
                     ItemStack shulkerBox = new ItemStack(Material.SHULKER_BOX);
                     BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
@@ -258,16 +265,14 @@ public final class Bk extends JavaPlugin implements Listener {
                     // Adicionar a Shulker Box ao inventário do jogador
                     player.getInventory().addItem(shulkerBox);
 
-                    player.sendMessage(ChatColor.GOLD + "Você recebeu uma Shulker Box cheia de 900 diamantes!");
-
-
 
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -276,7 +281,7 @@ public final class Bk extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.GOLD + "ΘΕ, Consciência emocional é pequena e leva a Morte Princesa Lilith");
+                    sender.sendMessage(ChatColor.DARK_GREEN + messageManager.getMessage("lilith_comando", language));
                     // Adicionando itens VIP ao jogador
 
                     player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
@@ -297,14 +302,15 @@ public final class Bk extends JavaPlugin implements Listener {
                     sword.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_MOBS"), 3); // Saque III
                     player.getInventory().addItem(sword);
 
-                    player.sendMessage(ChatColor.GREEN + "Sera Maldita ente todas sempentes voce mata os amimais!");
+                    sender.sendMessage(ChatColor.GREEN +messageManager.getMessage("Maldita_comando", language));
 
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -312,7 +318,7 @@ public final class Bk extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.GOLD + "ΣΚ, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)");
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE +messageManager.getMessage("eva_comando", language));
                     // Adicionando itens VIP ao jogador
                     player.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));// Rainha do Mar do Lado Oeste 27 Talentos
                     player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
@@ -338,14 +344,15 @@ public final class Bk extends JavaPlugin implements Listener {
                     // Adicionar o escudo ao inventário do jogador
                     player.getInventory().addItem(shield,hoe,axe);
 
-                    player.sendMessage(ChatColor.GREEN + "Rainha do Mar do Lado Oeste 27 Talentos!");
+                    sender.sendMessage(ChatColor.AQUA +messageManager.getMessage("Rainha_comando", language));
 
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -353,7 +360,7 @@ public final class Bk extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.GOLD + "ΔΙ, LAtino Pequeno (Homen Barro Adao)");
+                    sender.sendMessage(ChatColor.GOLD +messageManager.getMessage("adan_comando", language));
                     // Adicionando itens VIP ao jogador
                     player.getInventory().addItem(new ItemStack(Material.COBBLESTONE, 64)); // 1 Esporao de 64 Rochas (Pedregulho)
                     player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));// Prata
@@ -379,11 +386,12 @@ public final class Bk extends JavaPlugin implements Listener {
 
 
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -395,14 +403,13 @@ public final class Bk extends JavaPlugin implements Listener {
 
                         // Remove todos os itens do inventário do jogador
                         player.getInventory().clear();
-                        player.sendMessage(ChatColor.GREEN + "Todo o seu inventário foi limpo!");
+                    sender.sendMessage(ChatColor.GREEN +messageManager.getMessage("limpo_comando", language));
 
                     } else {
-                        sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                    sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                     }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
                 return true;
             }
         }
@@ -415,11 +422,12 @@ public final class Bk extends JavaPlugin implements Listener {
                     sender.sendMessage(ChatColor.GOLD + "Bem-vindo, VIP!");
                     player.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
                 } else {
-                    sender.sendMessage(ChatColor.RED + "Você não tem permissão para usar este comando.");
+                    sender.sendMessage(ChatColor.RED +
+                            messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage("Este comando só pode ser executado por um jogador.");
+                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -479,31 +487,6 @@ public final class Bk extends JavaPlugin implements Listener {
         }
     }
 
-    private boolean isVip(String playerName) {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement("SELECT player_name FROM vip_players WHERE player_name = ?")) {
-            pstmt.setString(1, playerName);
-            ResultSet rs = pstmt.executeQuery();
-            return rs.next();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-
-
-
-    private void removeDeathLocation(UUID playerId) {
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM death_locations WHERE player_id = ?")) {
-            pstmt.setString(1, playerId.toString());
-            pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private boolean hasReceivedKit(String playerName) {
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement("SELECT player_name FROM kit_log WHERE player_name = ?")) {
@@ -542,7 +525,8 @@ public final class Bk extends JavaPlugin implements Listener {
             defaultConfig.addProperty("language", "br"); // Adiciona o idioma padrão
 
             try (FileWriter writer = new FileWriter(configFile)) {
-                Gson gson = new Gson();
+                // Gson com Pretty Printing
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(defaultConfig, writer);
                 getLogger().info("Arquivo config.json criado com configuração padrão.");
             } catch (IOException e) {
@@ -575,11 +559,179 @@ public final class Bk extends JavaPlugin implements Listener {
             unlockChestMessages.addProperty("gr", "Έχετε ήδη λάβει τον μέγιστο επιτρεπόμενο αριθμό μπέργκερ σήμερα.");
             unlockChestMessages.addProperty("br", "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
 
+            JsonObject vipMessages = new JsonObject();
+            vipMessages.addProperty("en", "Welcome, VIP!");
+            vipMessages.addProperty("es", "¡Bienvenido, VIP!");
+            vipMessages.addProperty("ru", "Добро пожаловать, VIP!");
+            vipMessages.addProperty("he", "ברוך הבא, VIP!");
+            vipMessages.addProperty("ch", "欢迎，VIP！");
+            vipMessages.addProperty("ar", "مرحبًا، VIP!");
+            vipMessages.addProperty("gr", "Καλώς ήρθατε, VIP!");
+            vipMessages.addProperty("es", "Bem vindo, VIP!");
+
+            // Mensagem 1
+            JsonObject maxBurgerMessages = new JsonObject();
+            maxBurgerMessages.addProperty("br", "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
+            maxBurgerMessages.addProperty("en", "You have already received the maximum number of burgers allowed for today.");
+            messages.add("max_burger", maxBurgerMessages);
+
             messages.add("burguer_1", lockChestMessages);
             messages.add("burguer_2", unlockChestMessages);
 
+// Mensagem 2
+            JsonObject welcomeMessages = new JsonObject();
+            welcomeMessages.addProperty("br", "Bem vindo, {playerName}!");
+            welcomeMessages.addProperty("en", "Welcome, {playerName}!");
+            messages.add("welcome", welcomeMessages);
+
+// Mensagem 3
+            JsonObject kitReceivedMessages = new JsonObject();
+            kitReceivedMessages.addProperty("br", "Você acaba de receber um kit de sobrevivência básico!");
+            kitReceivedMessages.addProperty("en", "You just received a basic survival kit!");
+            messages.add("kit_received", kitReceivedMessages);
+
+// Mensagem 4
+            JsonObject welcomeBackMessages = new JsonObject();
+            welcomeBackMessages.addProperty("br", "Bem vindo de volta, {playerName}!");
+            welcomeBackMessages.addProperty("en", "Welcome back, {playerName}!");
+            messages.add("welcome_back", welcomeBackMessages);
+
+// Mensagem 5
+            JsonObject kitAlreadyReceivedMessages = new JsonObject();
+            kitAlreadyReceivedMessages.addProperty("br", "Você já recebeu seu kit!");
+            kitAlreadyReceivedMessages.addProperty("en", "You have already received your kit!");
+            messages.add("kit_already_received", kitAlreadyReceivedMessages);
+
+// Mensagem 6
+            JsonObject playerOnlyCommandMessages = new JsonObject();
+            playerOnlyCommandMessages.addProperty("br", "Este comando só pode ser executado por um jogador.");
+            playerOnlyCommandMessages.addProperty("en", "This command can only be executed by a player.");
+            messages.add("player_only_command", playerOnlyCommandMessages);
+
+// Mensagem 7
+            JsonObject playerVIPMessages = new JsonObject();
+            playerVIPMessages.addProperty("br", "O jogador {targetPlayerName} agora é um VIP!");
+            playerVIPMessages.addProperty("en", "The player {targetPlayerName} is now a VIP!");
+            messages.add("player_vip", playerVIPMessages);
+
+// Mensagem 8
+            JsonObject vipCongratsMessages = new JsonObject();
+            vipCongratsMessages.addProperty("br", "Parabéns, você recebeu o status de VIP!");
+            vipCongratsMessages.addProperty("en", "Congratulations, you have received VIP status!");
+            messages.add("vip_congrats", vipCongratsMessages);
+
+// Mensagem 9
+            JsonObject playerNotFoundMessages = new JsonObject();
+            playerNotFoundMessages.addProperty("br", "Jogador não encontrado.");
+            playerNotFoundMessages.addProperty("en", "Player not found.");
+            messages.add("player_not_found", playerNotFoundMessages);
+
+// Mensagem 10
+            JsonObject addVIPUsageMessages = new JsonObject();
+            addVIPUsageMessages.addProperty("br", "Uso correto: /addvip <nome_do_jogador>");
+            addVIPUsageMessages.addProperty("en", "Correct usage: /addvip <player_name>");
+            messages.add("addvip_usage", addVIPUsageMessages);
+
+// Mensagem 11
+            JsonObject noPermissionMessages = new JsonObject();
+            noPermissionMessages.addProperty("br", "Você não tem permissão para usar este comando.");
+            noPermissionMessages.addProperty("en", "You do not have permission to use this command.");
+            messages.add("no_permission", noPermissionMessages);
+
+// Mensagem 12
+            JsonObject removeVIPMessages = new JsonObject();
+            removeVIPMessages.addProperty("br", "O jogador {targetPlayerName} não é mais VIP.");
+            removeVIPMessages.addProperty("en", "The player {targetPlayerName} is no longer a VIP.");
+            messages.add("remove_vip", removeVIPMessages);
+
+// Mensagem 13
+            JsonObject notFoundVIPMessages = new JsonObject();
+            notFoundVIPMessages.addProperty("br", "O jogador {targetPlayerName} não foi encontrado como VIP.");
+            notFoundVIPMessages.addProperty("en", "The player {targetPlayerName} was not found as a VIP.");
+            messages.add("not_found_vip", notFoundVIPMessages);
+
+// Mensagem 14
+            JsonObject removeVIPUsageMessages = new JsonObject();
+            removeVIPUsageMessages.addProperty("br", "Uso correto: /rmvip <nome_do_jogador>");
+            removeVIPUsageMessages.addProperty("en", "Correct usage: /rmvip <player_name>");
+            messages.add("removevip_usage", removeVIPUsageMessages);
+
+// Mensagem 15
+            JsonObject inventoryClearedMessages = new JsonObject();
+            inventoryClearedMessages.addProperty("br", "Todo o seu inventário foi limpo!");
+            inventoryClearedMessages.addProperty("en", "Your entire inventory has been cleared!");
+            messages.add("inventory_cleared", inventoryClearedMessages);
+
+// Mensagem 16
+            JsonObject vipWelcomeMessages = new JsonObject();
+            vipWelcomeMessages.addProperty("br", "Bem-vindo, VIP!");
+            vipWelcomeMessages.addProperty("en", "Welcome, VIP!");
+            messages.add("vip_welcome", vipWelcomeMessages);
+
+            JsonObject jogadorcomando = new JsonObject();
+            jogadorcomando.addProperty("br", "Este comando só pode ser executado por um jogador.");
+            jogadorcomando.addProperty("en", "This command can only be executed by one player.");
+            messages.add("jogador_comando", jogadorcomando);
+
+            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
+
+            JsonObject emanuelcomando = new JsonObject();
+            emanuelcomando.addProperty("br", "XAΓ, Cristo  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante!");
+            emanuelcomando.addProperty("en", "XAΓ, Christ pricing strategy, scale, series of ideas, a star, a dominant male!");
+            messages.add("emanuel_comando", emanuelcomando);
+
+            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("emanuel_comando", language));
+
+            JsonObject lilithcomando = new JsonObject();//Satanas persoadio a cobra ela era a mas linda do jardim tinha asas e fez ela trazer eva e a cobra(lilith) por sua vez com eva e adao
+            lilithcomando.addProperty("br", "ΘΕ, Consciência emocional é pequena e leva a Morte Princesa Lilith");
+            lilithcomando.addProperty("en", "ΘΕ, Emotional awareness is small and leads to Death Princess Lilith");
+            messages.add("lilith_comando", lilithcomando);//a ma lingua da magia a ma fala a maldicao ela a cobrinha pesoadida de satanas mas nao e o proprio satanas
+
+            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("lilith_comando", language));
+
+
+            JsonObject evacomando = new JsonObject();
+            evacomando.addProperty("br", "ΣΚ, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)");
+            evacomando.addProperty("en", "ΣΚ, Lesbian Feminist is an aquatic creature, similar to a turtle, that inhabits rivers and lakes (EVE and Her Sins of the World)");
+            messages.add("eva_comando", evacomando);
+
+            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("eva_comando", language));
+
+            JsonObject adancomando = new JsonObject();
+            adancomando.addProperty("br", "ΔΙ, LAtino Pequeno (Homen Barro Adao)");
+            adancomando.addProperty("en", "ΔΙ, Small Latin (Clay Man Adam)");
+            messages.add("adan_comando", adancomando);
+
+            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("adan_comando", language));
+
+            JsonObject Rainhacomando = new JsonObject();
+            Rainhacomando.addProperty("br", "Rainha do Mar do Lado Oeste 27 Talentos!");
+            Rainhacomando.addProperty("en", "Queen of the West Sea 27 Talents!");
+            messages.add("Rainha_comando", Rainhacomando);
+
+
+
+            JsonObject Malditacomando = new JsonObject();
+            Malditacomando.addProperty("br", "Sera Maldita ente todas sempentes voce mata os amimais!");
+            Malditacomando.addProperty("en", "You will be cursed among all creatures, you kill animals!");
+            messages.add("Maldita_comando", Malditacomando);
+
+
+            JsonObject limpocomando = new JsonObject();
+            limpocomando.addProperty("br", "Todo o seu inventário foi limpo!");
+            limpocomando.addProperty("en", "Your entire inventory has been cleared!");
+            messages.add("limpo_comando", limpocomando);
+
+
+
+
+
+
+
             try (FileWriter writer = new FileWriter(messagesFile)) {
-                Gson gson = new Gson();
+
+                // Gson com Pretty Printing
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(messages, writer);
                 getLogger().info("Arquivo messages.json criado com mensagens padrão.");
             } catch (IOException e) {
