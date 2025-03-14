@@ -76,8 +76,6 @@ graph TD;
 
     L[Início do Desligamento] --> MonDisable();
     M --> N;
-
-    O[Comando recebido] --> PonCommand();
     P --> QComando "oi"?;
     Q --> Sim --> RJogador?;
     R --> Sim --> SJá recebeu o kit?;
