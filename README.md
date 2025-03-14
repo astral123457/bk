@@ -61,6 +61,8 @@ que significa "Cristo".  estratégia de precificação, escala, série de ideias
 
 ![image](https://github.com/user-attachments/assets/5a6795d7-de8a-4000-8003-b51297295103)
 
+Fluxo Grama ( a ideia e ser 4 presentes para um vip ou um moderador poder dar a aguem se quiser )
+
 ```mermaid
 graph TD;
     Inicializa-->onEnable;
