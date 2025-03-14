@@ -69,7 +69,7 @@ graph TD;
     onDisable-->Fim;
     adicionarItem-->Fim;
     vips-->Add;
-    vips-->rm;
+    vips-->Rm;
     Add-->adicionarItemVIP;
     adicionarItemVIP-->/lilith;
     /lilith-->Fim;
