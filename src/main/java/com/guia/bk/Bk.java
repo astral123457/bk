@@ -208,24 +208,28 @@ public final class Bk extends JavaPlugin implements Listener {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.AQUA +messageManager.getMessage("emanuel_comando", language));
-                    // Adicionando itens VIP ao jogador
+                    sender.sendMessage(ChatColor.AQUA + messageManager.getMessage("emanuel_comando", language));
 
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));
-                    player.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 64));
-                    player.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 36));
-                    player.getInventory().addItem(new ItemStack(Material.EMERALD, 12));
-                    player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, 1));//Sepulcral
-                    player.getInventory().addItem(new ItemStack(Material.COAL, 40));//Covodos
-                    player.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
-                    player.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 5)); // + 5 GOLD LINGOT
+                    // Criar a Shulker Box amarela
+                    ItemStack shulkerBox = new ItemStack(Material.YELLOW_SHULKER_BOX);
+                    BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
+                    ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
 
+                    // Adicionar os itens na Shulker Box
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 36));
+                    shulker.getInventory().addItem(new ItemStack(Material.EMERALD, 12));
+                    shulker.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, 1));
+                    shulker.getInventory().addItem(new ItemStack(Material.COAL, 40));
+                    shulker.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 5));
 
                     // Criar o capacete de Netherite
                     ItemStack helmet = new ItemStack(Material.NETHERITE_HELMET, 1);
                     helmet.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
-                    helmet.addUnsafeEnchantment(Enchantment.UNBREAKING, 3); // Inquebrável III
-                    helmet.addUnsafeEnchantment(Enchantment.MENDING, 1); // Remendo
+                    helmet.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+                    helmet.addUnsafeEnchantment(Enchantment.MENDING, 1);
 
                     // Criar outras peças de armadura de Netherite
                     ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE, 1);
@@ -242,21 +246,26 @@ public final class Bk extends JavaPlugin implements Listener {
                     boots.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
                     boots.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
                     boots.addUnsafeEnchantment(Enchantment.MENDING, 1);
-                    boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3); // Passos Profundos III
+                    boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
 
-                    // Adicionar os itens ao inventário do jogador
-                    player.getInventory().addItem(helmet, chestplate, leggings, boots);
+                    // Adicionar as armaduras na Shulker Box
+                    shulker.getInventory().addItem(helmet, chestplate, leggings, boots);
 
-                    // Criar a Shulker Box cheia de diamantes
-                    ItemStack shulkerBox = new ItemStack(Material.SHULKER_BOX);
-                    BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
-                    ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
-
-                    // Adicionar 900 diamantes na Shulker Box
-                    for (int i = 0; i < 14; i++) { // 14 stacks de 64
+                    // Adicionar diamantes na Shulker Box
+                    for (int i = 0; i < 14; i++) {
                         shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));
                     }
-                    shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 52)); // Resto (52)
+                    shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 52));
+
+                    // Criar a picareta especial encantada
+                    ItemStack pickaxe = new ItemStack(Material.NETHERITE_PICKAXE, 1);
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("DIG_SPEED"), 5); // Eficiência V
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("DURABILITY"), 3); // Inquebrável III
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1); // Remendo
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_BLOCKS"), 3); // Fortuna III
+
+                    // Adicionar a picareta encantada na Shulker Box
+                    shulker.getInventory().addItem(pickaxe);
 
                     // Salvar e aplicar as mudanças na Shulker Box
                     meta.setBlockState(shulker);
@@ -265,14 +274,12 @@ public final class Bk extends JavaPlugin implements Listener {
                     // Adicionar a Shulker Box ao inventário do jogador
                     player.getInventory().addItem(shulkerBox);
 
-
                 } else {
-                    sender.sendMessage(ChatColor.RED +
-                            messageManager.getMessage("no_permission", language));
+                    sender.sendMessage(ChatColor.RED + messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
+                sender.sendMessage(ChatColor.RED + messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -282,100 +289,31 @@ public final class Bk extends JavaPlugin implements Listener {
                 Player player = (Player) sender;
                 if (player.hasPermission("vip.use")) {
                     sender.sendMessage(ChatColor.DARK_GREEN + messageManager.getMessage("lilith_comando", language));
-                    // Adicionando itens VIP ao jogador
 
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));// Prata
-                    player.getInventory().addItem(new ItemStack(Material.EMERALD, 10));
-                    player.getInventory().addItem(new ItemStack(Material.WOLF_SPAWN_EGG, 1)); // Ovo de Lobo
-                    player.getInventory().addItem(new ItemStack(Material.SHEEP_SPAWN_EGG, 1)); // Ovo de Ovelha
-                    player.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
-                    player.getInventory().addItem(new ItemStack(Material.FLOWER_POT, 10)); // 10 vasos de flores
-
-                    // Criar uma espada de Netherite
-                    ItemStack sword = new ItemStack(Material.NETHERITE_SWORD, 1);
-
-                    sword.addUnsafeEnchantment(Enchantment.getByName("DAMAGE_ALL"), 5); // Afiado V
-                    sword.addUnsafeEnchantment(Enchantment.getByName("UNBREAKING"), 3); // Inquebrável III
-                    sword.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1); // Remendo
-                    sword.addUnsafeEnchantment(Enchantment.getByName("FIRE_ASPECT"), 2); // Aspecto Flamejante II
-                    sword.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_MOBS"), 3); // Saque III
-                    player.getInventory().addItem(sword);
-
-                    sender.sendMessage(ChatColor.GREEN +messageManager.getMessage("Maldita_comando", language));
-
-                } else {
-                    sender.sendMessage(ChatColor.RED +
-                            messageManager.getMessage("no_permission", language));
-                }
-                return true;
-            } else {
-                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
-                return true;
-            }
-        }
-        else if (command.getName().equalsIgnoreCase("eva")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
-                if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.LIGHT_PURPLE +messageManager.getMessage("eva_comando", language));
-                    // Adicionando itens VIP ao jogador
-                    player.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));// Rainha do Mar do Lado Oeste 27 Talentos
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
-
-                    player.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 64));
-                    player.getInventory().addItem(new ItemStack(Material.NETHERITE_BLOCK, 64));
-                    player.getInventory().addItem(new ItemStack(Material.EMERALD, 64));
-                    player.getInventory().addItem(new ItemStack(Material.COAL, 64));
-                    player.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
-
-
-                    ItemStack hoe = new ItemStack(Material.NETHERITE_HOE, 1);
-                    ItemStack axe = new ItemStack(Material.NETHERITE_AXE, 1);
-
-                    // Criar um escudo
-                    ItemStack shield = new ItemStack(Material.SHIELD, 1);
-
-                    // Adicionar encantamentos ao escudo
-                    shield.addUnsafeEnchantment(Enchantment.getByName("DURABILITY"), 3); // Inquebrável III
-                    shield.addUnsafeEnchantment(Enchantment.MENDING, 1); // Remendo
-
-                    // Adicionar o escudo ao inventário do jogador
-                    player.getInventory().addItem(shield,hoe,axe);
-
-                    sender.sendMessage(ChatColor.AQUA +messageManager.getMessage("Rainha_comando", language));
-
-                } else {
-                    sender.sendMessage(ChatColor.RED +
-                            messageManager.getMessage("no_permission", language));
-                }
-                return true;
-            } else {
-                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
-                return true;
-            }
-        }
-        else if (command.getName().equalsIgnoreCase("adan")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
-                if (player.hasPermission("vip.use")) {
-                    sender.sendMessage(ChatColor.GOLD +messageManager.getMessage("adan_comando", language));
-                    // Adicionando itens VIP ao jogador
-                    player.getInventory().addItem(new ItemStack(Material.COBBLESTONE, 64)); // 1 Esporao de 64 Rochas (Pedregulho)
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));// Prata
-
-                    player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));// Prata
-                    player.getInventory().addItem(new ItemStack(Material.TNT, 13)); // 13 blocos de TNT
-                    player.getInventory().addItem(new ItemStack(Material.SHEEP_SPAWN_EGG, 14)); // 14 Talentos do Norte do Friu bicho peludinho ovos de ovelhas
-
-                    // Criar a Shulker Box cheia de diamantes
-                    ItemStack shulkerBox = new ItemStack(Material.SHULKER_BOX);
+                    // Criar a Shulker Box verde
+                    ItemStack shulkerBox = new ItemStack(Material.GREEN_SHULKER_BOX);
                     BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
                     ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
 
-                    player.getInventory().addItem(new ItemStack(Material.WATER_BUCKET, 22)); // 22 Baldes de Água
+                    // Adicionar os itens na Shulker Box
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));
+                    shulker.getInventory().addItem(new ItemStack(Material.EMERALD, 10));
+                    shulker.getInventory().addItem(new ItemStack(Material.WOLF_SPAWN_EGG, 1));
+                    shulker.getInventory().addItem(new ItemStack(Material.SHEEP_SPAWN_EGG, 1));
+                    shulker.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
+                    shulker.getInventory().addItem(new ItemStack(Material.FLOWER_POT, 10));
 
+                    // Criar uma espada de Netherite
+                    ItemStack sword = new ItemStack(Material.NETHERITE_SWORD, 1);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("DAMAGE_ALL"), 5);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("UNBREAKING"), 3);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("FIRE_ASPECT"), 2);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_MOBS"), 3);
+
+                    // Adicionar a espada encantada na Shulker Box
+                    shulker.getInventory().addItem(sword);
 
                     // Salvar e aplicar as mudanças na Shulker Box
                     meta.setBlockState(shulker);
@@ -384,14 +322,101 @@ public final class Bk extends JavaPlugin implements Listener {
                     // Adicionar a Shulker Box ao inventário do jogador
                     player.getInventory().addItem(shulkerBox);
 
+                    sender.sendMessage(ChatColor.GREEN + messageManager.getMessage("Maldita_comando", language));
 
                 } else {
-                    sender.sendMessage(ChatColor.RED +
-                            messageManager.getMessage("no_permission", language));
+                    sender.sendMessage(ChatColor.RED + messageManager.getMessage("no_permission", language));
                 }
                 return true;
             } else {
-                sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
+                sender.sendMessage(ChatColor.RED + messageManager.getMessage("jogador_comando", language));
+                return true;
+            }
+        }
+        else if (command.getName().equalsIgnoreCase("eva")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if (player.hasPermission("vip.use")) {
+                    sender.sendMessage(ChatColor.LIGHT_PURPLE + messageManager.getMessage("eva_comando", language));
+
+                    // Criar a Shulker Box rosa
+                    ItemStack shulkerBox = new ItemStack(Material.PINK_SHULKER_BOX);
+                    BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
+                    ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
+
+                    // Adicionar os itens na Shulker Box
+                    shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.NETHERITE_BLOCK, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.EMERALD, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.COAL, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
+
+                    ItemStack hoe = new ItemStack(Material.NETHERITE_HOE, 1);
+                    ItemStack axe = new ItemStack(Material.NETHERITE_AXE, 1);
+
+                    // Criar um escudo
+                    ItemStack shield = new ItemStack(Material.SHIELD, 1);
+
+                    // Adicionar encantamentos ao escudo
+                    shield.addUnsafeEnchantment(Enchantment.getByName("DURABILITY"), 3);
+                    shield.addUnsafeEnchantment(Enchantment.MENDING, 1);
+
+                    // Adicionar os itens encantados na Shulker Box
+                    shulker.getInventory().addItem(shield, hoe, axe);
+
+                    // Salvar e aplicar as mudanças na Shulker Box
+                    meta.setBlockState(shulker);
+                    shulkerBox.setItemMeta(meta);
+
+                    // Adicionar a Shulker Box ao inventário do jogador
+                    player.getInventory().addItem(shulkerBox);
+
+                    sender.sendMessage(ChatColor.AQUA + messageManager.getMessage("Rainha_comando", language));
+
+                } else {
+                    sender.sendMessage(ChatColor.RED + messageManager.getMessage("no_permission", language));
+                }
+                return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + messageManager.getMessage("jogador_comando", language));
+                return true;
+            }
+        }
+        else if (command.getName().equalsIgnoreCase("adan")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if (player.hasPermission("vip.use")) {
+                    sender.sendMessage(ChatColor.GOLD + messageManager.getMessage("adan_comando", language));
+
+                    // Criar a Shulker Box marrom
+                    ItemStack shulkerBox = new ItemStack(Material.BROWN_SHULKER_BOX);
+                    BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
+                    ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
+
+                    // Adicionar os itens na Shulker Box
+                    shulker.getInventory().addItem(new ItemStack(Material.COBBLESTONE, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 6));
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));
+                    shulker.getInventory().addItem(new ItemStack(Material.TNT, 13));
+                    shulker.getInventory().addItem(new ItemStack(Material.SHEEP_SPAWN_EGG, 14));
+                    shulker.getInventory().addItem(new ItemStack(Material.WATER_BUCKET, 22));
+
+                    // Salvar e aplicar as mudanças na Shulker Box
+                    meta.setBlockState(shulker);
+                    shulkerBox.setItemMeta(meta);
+
+                    // Adicionar a Shulker Box ao inventário do jogador
+                    player.getInventory().addItem(shulkerBox);
+
+                } else {
+                    sender.sendMessage(ChatColor.RED + messageManager.getMessage("no_permission", language));
+                }
+                return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + messageManager.getMessage("jogador_comando", language));
                 return true;
             }
         }
@@ -580,8 +605,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
 // Mensagem 2
             JsonObject welcomeMessages = new JsonObject();
-            welcomeMessages.addProperty("br", "Bem vindo, {playerName}!");
-            welcomeMessages.addProperty("en", "Welcome, {playerName}!");
+            welcomeMessages.addProperty("br", "Bem vindo, §e§l☾☼§d§l{playerName}§r!");
+            welcomeMessages.addProperty("en", "Welcome, §e§l☾☼§d§l{playerName}§r!");
             messages.add("welcome", welcomeMessages);
 
 // Mensagem 3
@@ -592,8 +617,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
 // Mensagem 4
             JsonObject welcomeBackMessages = new JsonObject();
-            welcomeBackMessages.addProperty("br", "Bem vindo de volta, {playerName}!");
-            welcomeBackMessages.addProperty("en", "Welcome back, {playerName}!");
+            welcomeBackMessages.addProperty("br", "Bem vindo de volta, §e§l☾☼§d§l{playerName}§r!");
+            welcomeBackMessages.addProperty("en", "Welcome back, §e§l☾☼§d§l{playerName}§r!");
             messages.add("welcome_back", welcomeBackMessages);
 
 // Mensagem 5
@@ -610,8 +635,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
 // Mensagem 7
             JsonObject playerVIPMessages = new JsonObject();
-            playerVIPMessages.addProperty("br", "O jogador {targetPlayerName} agora é um VIP!");
-            playerVIPMessages.addProperty("en", "The player {targetPlayerName} is now a VIP!");
+            playerVIPMessages.addProperty("br", "O jogador §e§l☾☼§d§l{targetPlayerName}§r agora é um VIP!");
+            playerVIPMessages.addProperty("en", "The player §e§l☾☼§d§l{targetPlayerName}§r is now a VIP!");
             messages.add("player_vip", playerVIPMessages);
 
 // Mensagem 8
@@ -640,8 +665,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
 // Mensagem 12
             JsonObject removeVIPMessages = new JsonObject();
-            removeVIPMessages.addProperty("br", "O jogador {targetPlayerName} não é mais VIP.");
-            removeVIPMessages.addProperty("en", "The player {targetPlayerName} is no longer a VIP.");
+            removeVIPMessages.addProperty("br", "O jogador §e§l☾☼§d§l{targetPlayerName}§r não é mais VIP.");
+            removeVIPMessages.addProperty("en", "The player §e§l☾☼§d§l{targetPlayerName}§r is no longer a VIP.");
             messages.add("remove_vip", removeVIPMessages);
 
 // Mensagem 13
@@ -664,8 +689,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
 // Mensagem 16
             JsonObject vipWelcomeMessages = new JsonObject();
-            vipWelcomeMessages.addProperty("br", "Bem-vindo, VIP!");
-            vipWelcomeMessages.addProperty("en", "Welcome, VIP!");
+            vipWelcomeMessages.addProperty("br", "Bem-vindo, §e§l☾☼§d§lVIP!");
+            vipWelcomeMessages.addProperty("en", "Welcome, §e§l☾☼§d§lVIP!");
             messages.add("vip_welcome", vipWelcomeMessages);
 
             JsonObject jogadorcomando = new JsonObject();
@@ -676,30 +701,30 @@ public final class Bk extends JavaPlugin implements Listener {
             //sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
 
             JsonObject emanuelcomando = new JsonObject();
-            emanuelcomando.addProperty("br", "XAΓ, Cristo  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante!");
-            emanuelcomando.addProperty("en", "XAΓ, Christ pricing strategy, scale, series of ideas, a star, a dominant male!");
+            emanuelcomando.addProperty("br", "§b§lXAΓ§6, Cristo  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante!");
+            emanuelcomando.addProperty("en", "§b§lXAΓ§6, Christ pricing strategy, scale, series of ideas, a star, a dominant male!");
             messages.add("emanuel_comando", emanuelcomando);
 
             //sender.sendMessage(ChatColor.RED +messageManager.getMessage("emanuel_comando", language));
 
             JsonObject lilithcomando = new JsonObject();//Satanas persoadio a cobra ela era a mas linda do jardim tinha asas e fez ela trazer eva e a cobra(lilith) por sua vez com eva e adao
-            lilithcomando.addProperty("br", "ΘΕ, Consciência emocional é pequena e leva a Morte Princesa Lilith");
-            lilithcomando.addProperty("en", "ΘΕ, Emotional awareness is small and leads to Death Princess Lilith");
+            lilithcomando.addProperty("br", "§b§lΘΕ§6, Consciência emocional é pequena e leva a Morte Princesa Lilith");
+            lilithcomando.addProperty("en", "§b§lΘΕ§6, Emotional awareness is small and leads to Death Princess Lilith");
             messages.add("lilith_comando", lilithcomando);//a ma lingua da magia a ma fala a maldicao ela a cobrinha pesoadida de satanas mas nao e o proprio satanas
 
             //sender.sendMessage(ChatColor.RED +messageManager.getMessage("lilith_comando", language));
 
 
             JsonObject evacomando = new JsonObject();
-            evacomando.addProperty("br", "ΣΚ, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)");
-            evacomando.addProperty("en", "ΣΚ, Lesbian Feminist is an aquatic creature, similar to a turtle, that inhabits rivers and lakes (EVE and Her Sins of the World)");
+            evacomando.addProperty("br", "§b§lΣΚ§6, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)");
+            evacomando.addProperty("en", "§b§lΣΚ§6, Lesbian Feminist is an aquatic creature, similar to a turtle, that inhabits rivers and lakes (EVE and Her Sins of the World)");
             messages.add("eva_comando", evacomando);
 
             //sender.sendMessage(ChatColor.RED +messageManager.getMessage("eva_comando", language));
 
             JsonObject adancomando = new JsonObject();
-            adancomando.addProperty("br", "ΔΙ, LAtino Pequeno (Homen Barro Adao)");
-            adancomando.addProperty("en", "ΔΙ, Small Latin (Clay Man Adam)");
+            adancomando.addProperty("br", "§b§lΔΙ§6, LAtino Pequeno (Homen Barro Adao)");
+            adancomando.addProperty("en", "§b§lΔΙ§6, Small Latin (Clay Man Adam)");
             messages.add("adan_comando", adancomando);
 
             //sender.sendMessage(ChatColor.RED +messageManager.getMessage("adan_comando", language));
