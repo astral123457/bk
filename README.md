@@ -70,7 +70,17 @@ graph TD;
     adicionarItem-->Fim;
     vips-->Add;
     vips-->rm;
-    Add-->Fim;
-    rm-->Fim;
+    Add-->adicionarItemVIP;
+    adicionarItemVIP-->/lilith;
+    /lilith-->Fim;
+    adicionarItemVIP-->/emanuel;
+    /emanuel-->Fim;
+    adicionarItemVIP-->/eva;
+    /eva-->Fim;
+    adicionarItemVIP-->/adan;
+    /adan-->Fim;
+    adicionarItemVIP-->/limpar;
+    /limpar-->Fim;
+    Rm-->Fim;
 ```
 
