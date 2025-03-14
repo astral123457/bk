@@ -14,7 +14,7 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
 
-# Testamento de Zeus aos 4
+# Testamento de (Z) or (D) Z.eus aos 4
 
 XAΓ O Chi Rho é formado pela combinação das duas primeiras letras da palavra grega Christos, 
 que significa "Cristo".  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante
