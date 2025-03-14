@@ -75,7 +75,7 @@ graph TD;
     J --> K;
 
     L[Início do Desligamento] --> MonDisable();
-    M --> N[Plugin desabilitado];
+    M --> N;
 
     O[Comando recebido] --> PonCommand();
     P --> QComando "oi"?;
