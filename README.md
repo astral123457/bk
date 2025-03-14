@@ -3,18 +3,29 @@
 Explicações:
 
 onEnable():
+
 Inicializa o plugin, carrega configurações, registra eventos e comandos.
+
 Verifica se o plugin está habilitado na configuração e, se não, o desativa.
+
 onDisable():
+
 Desabilita o plugin.
 
 Adiciona itens ao inventário do jogador, limitando a 3 vezes.
+
 Realiza verificações de permissão e argumentos.
+
 Executa ações diferentes dependendo do comando.
+
 Verifica se o jogador que executou o comando é um jogador ou o console.
+
 Verifica as permissões do jogador.
+
 Gerencia os kits dos vips.
+
 Gerencia a adição e remoção de vips.
+
 Gerencia o comando de /limpar o inventário.
 
 
