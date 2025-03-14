@@ -65,7 +65,8 @@ que significa "Cristo".  estratégia de precificação, escala, série de ideias
 graph TD;
     Inicializa-->onEnable;
     Inicializa-->onDisable;
-    onEnable-->D;
-    onDisable-->D;
+    onEnable-->adicionarItem;
+    onDisable-->Fim;
+    adicionarItem-->Fim;
 ```
 
