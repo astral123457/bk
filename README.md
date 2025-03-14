@@ -27,3 +27,6 @@ que significa "Cristo".  estratégia de precificação, escala, série de ideias
 
 
 ΣΚ Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)
+
+![image](https://github.com/user-attachments/assets/5a6795d7-de8a-4000-8003-b51297295103)
+
