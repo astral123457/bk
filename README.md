@@ -67,7 +67,7 @@ graph TD;
     Inicializa-->onDisable;
     onEnable-->adicionarItem;
     onDisable-->Fim;
-    adicionarItem-->Fim;
+    adicionarItem-->vips;
     vips-->Add;
     vips-->Rm;
     Add-->adicionarItemVIP;
