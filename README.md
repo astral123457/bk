@@ -1,5 +1,24 @@
 # BK Kit básico de alimentação no inicio do Minecraft
 
+Explicações:
+
+onEnable():
+Inicializa o plugin, carrega configurações, registra eventos e comandos.
+Verifica se o plugin está habilitado na configuração e, se não, o desativa.
+onDisable():
+Desabilita o plugin.
+
+Adiciona itens ao inventário do jogador, limitando a 3 vezes.
+Realiza verificações de permissão e argumentos.
+Executa ações diferentes dependendo do comando.
+Verifica se o jogador que executou o comando é um jogador ou o console.
+Verifica as permissões do jogador.
+Gerencia os kits dos vips.
+Gerencia a adição e remoção de vips.
+Gerencia o comando de /limpar o inventário.
+
+
+
 Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
          Command: /oi
@@ -10,6 +29,7 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /emanuel (kit stive Apocaliptico)
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
+                  /limpar (limpar o inventário.)
 
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
