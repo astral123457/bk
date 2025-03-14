@@ -63,16 +63,16 @@ que significa "Cristo".  estratégia de precificação, escala, série de ideias
 
 ```mermaid
 graph TD;
-    A[Início do Plugin] --> BonEnable();
-    B --> CCriar pastas e configs;
-    C --> DCarregar status do plugin;
-    D --> EPlugin está habilitado?;
-    E -- Não --> F[Desativar plugin];
-    E -- Sim --> GRegistrar eventos;
-    G --> HConfigurar banco de dados;
-    H --> ICarregar idioma;
-    I --> JRegistrar comandos;
-    J --> K[Plugin habilitado];
+    A --> A;
+    B --> B;
+    C --> D;
+    D --> E;
+    E -- N;
+    E -- S;
+    G --> Hs;
+    H --> I;
+    I --> J;
+    J --> K;
 
     L[Início do Desligamento] --> MonDisable();
     M --> N[Plugin desabilitado];
