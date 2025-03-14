@@ -11,6 +11,9 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
 
+![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
+
+
 # Testamento de Zeus aos 4
 
 XAΓ O Chi Rho é formado pela combinação das duas primeiras letras da palavra grega Christos, 
