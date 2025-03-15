@@ -1,5 +1,7 @@
 # BK Kit básico de alimentação no inicio do Minecraft
 
+# Languem Support BR, EN, ES, FR, DE
+
 Explicações:
 
 onEnable():
