@@ -115,12 +115,27 @@ public final class Bk extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String language = loadLanguage(); // Carrega o idioma configurado
+        Player player2 = (Player) sender;
+        String language = player2.getLocale().toLowerCase();
+        if (language.startsWith("pt")) {
+            language = "br";
+        } else if (language.startsWith("en")) {
+            language = "en";
+        } else if (language.startsWith("es")) {
+            language = "es";
+        } else if (language.startsWith("fr")) {
+            language = "fr";
+        } else if (language.startsWith("de")) {
+            language = "de";
+        } else {
+            language = "default"; // Idioma padrão caso não seja reconhecido
+        }
         MessageManager messageManager = new MessageManager(); // Gerenciador de mensagens
 
         if (command.getName().equalsIgnoreCase("oi")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
+
                 String playerName = player.getName();
 
                 if (!hasReceivedKit(playerName)) {
