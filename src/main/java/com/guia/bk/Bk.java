@@ -582,189 +582,226 @@ public final class Bk extends JavaPlugin implements Listener {
             JsonObject lockChestMessages = new JsonObject();
             lockChestMessages.addProperty("en", "You received a burger during the day today! (");
             lockChestMessages.addProperty("es", "¡Recibiste una hamburguesa hoy! (");
-            lockChestMessages.addProperty("ru", "Сегодня вы получили бургер! (");
-            lockChestMessages.addProperty("he", "קיבלת היום המבורגר! (");
-            lockChestMessages.addProperty("ch", "今天你收到一個漢堡了！ (");
-            lockChestMessages.addProperty("ar", "لقد تلقيت برجر اليوم! (");
-            lockChestMessages.addProperty("gr", "Έλαβες ένα μπέργκερ σήμερα! (");
             lockChestMessages.addProperty("br", "Você recebeu um hambúrguer durante o dia de hoje! (");
+            lockChestMessages.addProperty("fr", "Vous avez reçu un burger aujourd'hui ! (");
+            lockChestMessages.addProperty("de", "Sie haben heute einen Burger erhalten! (");
+            messages.add("burguer_1", lockChestMessages);
+
 
             JsonObject unlockChestMessages = new JsonObject();
             unlockChestMessages.addProperty("en", "You have already received the maximum number of burgers allowed for today.");
             unlockChestMessages.addProperty("es", "Ya has recibido el número máximo de hamburguesas permitidas hoy.");
-            unlockChestMessages.addProperty("ru", "Вы уже получили максимально разрешенное сегодня количество гамбургеров.");
-            unlockChestMessages.addProperty("he", "כבר קיבלת את מספר ההמבורגרים המרבי המותר היום.");
-            unlockChestMessages.addProperty("ch", "您今天已經收到了允許的最大數量的漢堡。");
-            unlockChestMessages.addProperty("ar", "لقد تلقيت بالفعل الحد الأقصى لعدد البرغر المسموح به اليوم.");
-            unlockChestMessages.addProperty("gr", "Έχετε ήδη λάβει τον μέγιστο επιτρεπόμενο αριθμό μπέργκερ σήμερα.");
             unlockChestMessages.addProperty("br", "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
+            unlockChestMessages.addProperty("fr", "Vous avez déjà reçu le nombre maximum de burgers autorisés pour aujourd'hui.");
+            unlockChestMessages.addProperty("de", "Sie haben bereits die maximale Anzahl an erlaubten Burgern für heute erhalten.");
+            messages.add("burguer_2", unlockChestMessages);
 
             JsonObject vipMessages = new JsonObject();
             vipMessages.addProperty("en", "Welcome, VIP!");
             vipMessages.addProperty("es", "¡Bienvenido, VIP!");
-            vipMessages.addProperty("ru", "Добро пожаловать, VIP!");
-            vipMessages.addProperty("he", "ברוך הבא, VIP!");
-            vipMessages.addProperty("ch", "欢迎，VIP！");
-            vipMessages.addProperty("ar", "مرحبًا، VIP!");
-            vipMessages.addProperty("gr", "Καλώς ήρθατε, VIP!");
-            vipMessages.addProperty("es", "Bem vindo, VIP!");
+            vipMessages.addProperty("br", "Bem vindo, VIP!");
+            vipMessages.addProperty("fr", "Bienvenue, VIP !");
+            vipMessages.addProperty("de", "Willkommen, VIP!");
 
             // Mensagem 1
             JsonObject maxBurgerMessages = new JsonObject();
             maxBurgerMessages.addProperty("br", "Você já recebeu o máximo de hambúrgueres permitido durante o dia de hoje.");
             maxBurgerMessages.addProperty("en", "You have already received the maximum number of burgers allowed for today.");
+            maxBurgerMessages.addProperty("es", "Ya has recibido el número máximo de hamburguesas permitidas hoy.");
+            maxBurgerMessages.addProperty("fr", "Vous avez déjà reçu le nombre maximum de burgers autorisés pour aujourd'hui.");
+            maxBurgerMessages.addProperty("de", "Sie haben bereits die maximale Anzahl an erlaubten Burgern für heute erhalten.");
             messages.add("max_burger", maxBurgerMessages);
-
-            messages.add("burguer_1", lockChestMessages);
-            messages.add("burguer_2", unlockChestMessages);
 
 // Mensagem 2
             JsonObject welcomeMessages = new JsonObject();
             welcomeMessages.addProperty("br", "Bem vindo, §e§l☾☼§d§l{playerName}§r!");
             welcomeMessages.addProperty("en", "Welcome, §e§l☾☼§d§l{playerName}§r!");
+            welcomeMessages.addProperty("es", "¡Bienvenido, §e§l☾☼§d§l{playerName}§r!");
+            welcomeMessages.addProperty("fr", "Bienvenue, §e§l☾☼§d§l{playerName}§r!");
+            welcomeMessages.addProperty("de", "Willkommen, §e§l☾☼§d§l{playerName}§r!");
             messages.add("welcome", welcomeMessages);
 
 // Mensagem 3
             JsonObject kitReceivedMessages = new JsonObject();
             kitReceivedMessages.addProperty("br", "Você acaba de receber um kit de sobrevivência básico!");
             kitReceivedMessages.addProperty("en", "You just received a basic survival kit!");
+            kitReceivedMessages.addProperty("es", "¡Acabas de recibir un kit de supervivencia básico!");
+            kitReceivedMessages.addProperty("fr", "Vous venez de recevoir un kit de survie de base !");
+            kitReceivedMessages.addProperty("de", "Sie haben gerade ein grundlegendes Überlebenskit erhalten!");
             messages.add("kit_received", kitReceivedMessages);
 
 // Mensagem 4
             JsonObject welcomeBackMessages = new JsonObject();
             welcomeBackMessages.addProperty("br", "Bem vindo de volta, §e§l☾☼§d§l{playerName}§r!");
             welcomeBackMessages.addProperty("en", "Welcome back, §e§l☾☼§d§l{playerName}§r!");
+            welcomeBackMessages.addProperty("es", "¡Bienvenido de nuevo, §e§l☾☼§d§l{playerName}§r!");
+            welcomeBackMessages.addProperty("fr", "Bon retour, §e§l☾☼§d§l{playerName}§r!");
+            welcomeBackMessages.addProperty("de", "Willkommen zurück, §e§l☾☼§d§l{playerName}§r!");
             messages.add("welcome_back", welcomeBackMessages);
 
 // Mensagem 5
             JsonObject kitAlreadyReceivedMessages = new JsonObject();
             kitAlreadyReceivedMessages.addProperty("br", "Você já recebeu seu kit!");
             kitAlreadyReceivedMessages.addProperty("en", "You have already received your kit!");
+            kitAlreadyReceivedMessages.addProperty("es", "¡Ya has recibido tu kit!");
+            kitAlreadyReceivedMessages.addProperty("fr", "Vous avez déjà reçu votre kit !");
+            kitAlreadyReceivedMessages.addProperty("de", "Sie haben Ihr Kit bereits erhalten!");
             messages.add("kit_already_received", kitAlreadyReceivedMessages);
 
 // Mensagem 6
             JsonObject playerOnlyCommandMessages = new JsonObject();
             playerOnlyCommandMessages.addProperty("br", "Este comando só pode ser executado por um jogador.");
             playerOnlyCommandMessages.addProperty("en", "This command can only be executed by a player.");
+            playerOnlyCommandMessages.addProperty("es", "Este comando solo puede ser ejecutado por un jugador.");
+            playerOnlyCommandMessages.addProperty("fr", "Cette commande ne peut être exécutée que par un joueur.");
+            playerOnlyCommandMessages.addProperty("de", "Dieser Befehl kann nur von einem Spieler ausgeführt werden.");
             messages.add("player_only_command", playerOnlyCommandMessages);
 
 // Mensagem 7
             JsonObject playerVIPMessages = new JsonObject();
             playerVIPMessages.addProperty("br", "O jogador §e§l☾☼§d§l{targetPlayerName}§r agora é um VIP!");
             playerVIPMessages.addProperty("en", "The player §e§l☾☼§d§l{targetPlayerName}§r is now a VIP!");
+            playerVIPMessages.addProperty("es", "¡El jugador §e§l☾☼§d§l{targetPlayerName}§r ahora es un VIP!");
+            playerVIPMessages.addProperty("fr", "Le joueur §e§l☾☼§d§l{targetPlayerName}§r est maintenant un VIP !");
+            playerVIPMessages.addProperty("de", "Der Spieler §e§l☾☼§d§l{targetPlayerName}§r ist jetzt ein VIP!");
             messages.add("player_vip", playerVIPMessages);
 
-// Mensagem 8
             JsonObject vipCongratsMessages = new JsonObject();
             vipCongratsMessages.addProperty("br", "Parabéns, você recebeu o status de VIP!");
             vipCongratsMessages.addProperty("en", "Congratulations, you have received VIP status!");
+            vipCongratsMessages.addProperty("es", "¡Felicidades, has recibido el estado VIP!");
+            vipCongratsMessages.addProperty("fr", "Félicitations, vous avez obtenu le statut VIP !");
+            vipCongratsMessages.addProperty("de", "Herzlichen Glückwunsch, Sie haben den VIP-Status erhalten!");
             messages.add("vip_congrats", vipCongratsMessages);
 
-// Mensagem 9
             JsonObject playerNotFoundMessages = new JsonObject();
             playerNotFoundMessages.addProperty("br", "Jogador não encontrado.");
             playerNotFoundMessages.addProperty("en", "Player not found.");
+            playerNotFoundMessages.addProperty("es", "Jugador no encontrado.");
+            playerNotFoundMessages.addProperty("fr", "Joueur non trouvé.");
+            playerNotFoundMessages.addProperty("de", "Spieler nicht gefunden.");
             messages.add("player_not_found", playerNotFoundMessages);
 
-// Mensagem 10
             JsonObject addVIPUsageMessages = new JsonObject();
             addVIPUsageMessages.addProperty("br", "Uso correto: /addvip <nome_do_jogador>");
             addVIPUsageMessages.addProperty("en", "Correct usage: /addvip <player_name>");
+            addVIPUsageMessages.addProperty("es", "Uso correcto: /addvip <nombre_del_jugador>");
+            addVIPUsageMessages.addProperty("fr", "Utilisation correcte : /addvip <nom_du_joueur>");
+            addVIPUsageMessages.addProperty("de", "Korrekte Verwendung: /addvip <spielername>");
             messages.add("addvip_usage", addVIPUsageMessages);
 
-// Mensagem 11
             JsonObject noPermissionMessages = new JsonObject();
             noPermissionMessages.addProperty("br", "Você não tem permissão para usar este comando.");
             noPermissionMessages.addProperty("en", "You do not have permission to use this command.");
+            noPermissionMessages.addProperty("es", "No tienes permiso para usar este comando.");
+            noPermissionMessages.addProperty("fr", "Vous n'avez pas la permission d'utiliser cette commande.");
+            noPermissionMessages.addProperty("de", "Sie haben keine Berechtigung, diesen Befehl zu verwenden.");
             messages.add("no_permission", noPermissionMessages);
 
-// Mensagem 12
             JsonObject removeVIPMessages = new JsonObject();
             removeVIPMessages.addProperty("br", "O jogador §e§l☾☼§d§l{targetPlayerName}§r não é mais VIP.");
             removeVIPMessages.addProperty("en", "The player §e§l☾☼§d§l{targetPlayerName}§r is no longer a VIP.");
+            removeVIPMessages.addProperty("es", "El jugador §e§l☾☼§d§l{targetPlayerName}§r ya no es VIP.");
+            removeVIPMessages.addProperty("fr", "Le joueur §e§l☾☼§d§l{targetPlayerName}§r n'est plus VIP.");
+            removeVIPMessages.addProperty("de", "Der Spieler §e§l☾☼§d§l{targetPlayerName}§r ist nicht mehr VIP.");
             messages.add("remove_vip", removeVIPMessages);
 
-// Mensagem 13
             JsonObject notFoundVIPMessages = new JsonObject();
             notFoundVIPMessages.addProperty("br", "O jogador {targetPlayerName} não foi encontrado como VIP.");
             notFoundVIPMessages.addProperty("en", "The player {targetPlayerName} was not found as a VIP.");
+            notFoundVIPMessages.addProperty("es", "El jugador {targetPlayerName} no fue encontrado como VIP.");
+            notFoundVIPMessages.addProperty("fr", "Le joueur {targetPlayerName} n'a pas été trouvé comme VIP.");
+            notFoundVIPMessages.addProperty("de", "Der Spieler {targetPlayerName} wurde nicht als VIP gefunden.");
             messages.add("not_found_vip", notFoundVIPMessages);
 
-// Mensagem 14
             JsonObject removeVIPUsageMessages = new JsonObject();
             removeVIPUsageMessages.addProperty("br", "Uso correto: /rmvip <nome_do_jogador>");
             removeVIPUsageMessages.addProperty("en", "Correct usage: /rmvip <player_name>");
+            removeVIPUsageMessages.addProperty("es", "Uso correcto: /rmvip <nombre_del_jugador>");
+            removeVIPUsageMessages.addProperty("fr", "Utilisation correcte : /rmvip <nom_du_joueur>");
+            removeVIPUsageMessages.addProperty("de", "Korrekte Verwendung: /rmvip <spielername>");
             messages.add("removevip_usage", removeVIPUsageMessages);
 
-// Mensagem 15
             JsonObject inventoryClearedMessages = new JsonObject();
             inventoryClearedMessages.addProperty("br", "Todo o seu inventário foi limpo!");
             inventoryClearedMessages.addProperty("en", "Your entire inventory has been cleared!");
+            inventoryClearedMessages.addProperty("es", "Todo tu inventario ha sido limpiado!");
+            inventoryClearedMessages.addProperty("fr", "Tout votre inventaire a été nettoyé!");
+            inventoryClearedMessages.addProperty("de", "Ihr gesamtes Inventar wurde geleert!");
             messages.add("inventory_cleared", inventoryClearedMessages);
 
-// Mensagem 16
             JsonObject vipWelcomeMessages = new JsonObject();
             vipWelcomeMessages.addProperty("br", "Bem-vindo, §e§l☾☼§d§lVIP!");
             vipWelcomeMessages.addProperty("en", "Welcome, §e§l☾☼§d§lVIP!");
+            vipWelcomeMessages.addProperty("es", "¡Bienvenido, §e§l☾☼§d§lVIP!");
+            vipWelcomeMessages.addProperty("fr", "Bienvenue, §e§l☾☼§d§lVIP !");
+            vipWelcomeMessages.addProperty("de", "Willkommen, §e§l☾☼§d§lVIP!");
             messages.add("vip_welcome", vipWelcomeMessages);
+
 
             JsonObject jogadorcomando = new JsonObject();
             jogadorcomando.addProperty("br", "Este comando só pode ser executado por um jogador.");
             jogadorcomando.addProperty("en", "This command can only be executed by one player.");
+            jogadorcomando.addProperty("es", "Este comando solo puede ser ejecutado por un jugador.");
+            jogadorcomando.addProperty("fr", "Cette commande ne peut être exécutée que par un joueur.");
+            jogadorcomando.addProperty("de", "Dieser Befehl kann nur von einem Spieler ausgeführt werden.");
             messages.add("jogador_comando", jogadorcomando);
 
-            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("jogador_comando", language));
-
             JsonObject emanuelcomando = new JsonObject();
-            emanuelcomando.addProperty("br", "§b§lXAΓ§6, Cristo  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante!");
+            emanuelcomando.addProperty("br", "§b§lXAΓ§6, Cristo estratégia de precificação, escala, série de ideias, uma estrela, um macho dominante!");
             emanuelcomando.addProperty("en", "§b§lXAΓ§6, Christ pricing strategy, scale, series of ideas, a star, a dominant male!");
+            emanuelcomando.addProperty("es", "§b§lXAΓ§6, Cristo estrategia de precios, escala, serie de ideas, una estrella, un macho dominante!");
+            emanuelcomando.addProperty("fr", "§b§lXAΓ§6, Christ stratégie de tarification, échelle, série d'idées, une étoile, un mâle dominant!");
+            emanuelcomando.addProperty("de", "§b§lXAΓ§6, Christus Preisstrategie, Skala, Ideenreihe, ein Stern, ein dominantes Männchen!");
             messages.add("emanuel_comando", emanuelcomando);
 
-            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("emanuel_comando", language));
-
-            JsonObject lilithcomando = new JsonObject();//Satanas persoadio a cobra ela era a mas linda do jardim tinha asas e fez ela trazer eva e a cobra(lilith) por sua vez com eva e adao
+            JsonObject lilithcomando = new JsonObject();
             lilithcomando.addProperty("br", "§b§lΘΕ§6, Consciência emocional é pequena e leva a Morte Princesa Lilith");
             lilithcomando.addProperty("en", "§b§lΘΕ§6, Emotional awareness is small and leads to Death Princess Lilith");
-            messages.add("lilith_comando", lilithcomando);//a ma lingua da magia a ma fala a maldicao ela a cobrinha pesoadida de satanas mas nao e o proprio satanas
-
-            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("lilith_comando", language));
-
+            lilithcomando.addProperty("es", "§b§lΘΕ§6, La conciencia emocional es pequeña y lleva a la Muerte Princesa Lilith");
+            lilithcomando.addProperty("fr", "§b§lΘΕ§6, La conscience émotionnelle est faible et mène à la Mort Princesse Lilith");
+            lilithcomando.addProperty("de", "§b§lΘΕ§6, Emotionale Bewusstheit ist gering und führt zur Todesprinzessin Lilith");
+            messages.add("lilith_comando", lilithcomando);
 
             JsonObject evacomando = new JsonObject();
-            evacomando.addProperty("br", "§b§lΣΚ§6, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)");
+            evacomando.addProperty("br", "§b§lΣΚ§6, Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos (EVA e Seus pecados Do mundo)");
             evacomando.addProperty("en", "§b§lΣΚ§6, Lesbian Feminist is an aquatic creature, similar to a turtle, that inhabits rivers and lakes (EVE and Her Sins of the World)");
+            evacomando.addProperty("es", "§b§lΣΚ§6, Feminista lesbiana es una criatura acuática, similar a una tortuga, que habita ríos y lagos (EVA y sus pecados del mundo)");
+            evacomando.addProperty("fr", "§b§lΣΚ§6, Féministe lesbienne est une créature aquatique, semblable à une tortue, qui habite les rivières et les lacs (EVE et ses péchés du monde)");
+            evacomando.addProperty("de", "§b§lΣΚ§6, Lesbische Feministin ist ein Wasserwesen, ähnlich einer Schildkröte, das Flüsse und Seen bewohnt (EVA und ihre Sünden der Welt)");
             messages.add("eva_comando", evacomando);
 
-            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("eva_comando", language));
-
             JsonObject adancomando = new JsonObject();
-            adancomando.addProperty("br", "§b§lΔΙ§6, LAtino Pequeno (Homen Barro Adao)");
+            adancomando.addProperty("br", "§b§lΔΙ§6, Latino Pequeno (Homem Barro Adão)");
             adancomando.addProperty("en", "§b§lΔΙ§6, Small Latin (Clay Man Adam)");
+            adancomando.addProperty("es", "§b§lΔΙ§6, Latino pequeño (Hombre de barro Adán)");
+            adancomando.addProperty("fr", "§b§lΔΙ§6, Petit latin (Homme d'argile Adam)");
+            adancomando.addProperty("de", "§b§lΔΙ§6, Kleiner Lateiner (Tonmann Adam)");
             messages.add("adan_comando", adancomando);
-
-            //sender.sendMessage(ChatColor.RED +messageManager.getMessage("adan_comando", language));
 
             JsonObject Rainhacomando = new JsonObject();
             Rainhacomando.addProperty("br", "Rainha do Mar do Lado Oeste 27 Talentos!");
             Rainhacomando.addProperty("en", "Queen of the West Sea 27 Talents!");
+            Rainhacomando.addProperty("es", "Reina del Mar del Oeste 27 Talentos!");
+            Rainhacomando.addProperty("fr", "Reine de la mer de l'Ouest 27 Talents!");
+            Rainhacomando.addProperty("de", "Königin des Westmeeres 27 Talente!");
             messages.add("Rainha_comando", Rainhacomando);
 
-
-
             JsonObject Malditacomando = new JsonObject();
-            Malditacomando.addProperty("br", "Sera Maldita ente todas sempentes voce mata os amimais!");
+            Malditacomando.addProperty("br", "Será Maldita entre todas as serpentes, você mata os animais!");
             Malditacomando.addProperty("en", "You will be cursed among all creatures, you kill animals!");
+            Malditacomando.addProperty("es", "Serás maldita entre todas las serpientes, ¡matas a los animales!");
+            Malditacomando.addProperty("fr", "Tu seras maudite parmi toutes les créatures, tu tues les animaux!");
+            Malditacomando.addProperty("de", "Du wirst unter allen Kreaturen verflucht sein, du tötest Tiere!");
             messages.add("Maldita_comando", Malditacomando);
-
 
             JsonObject limpocomando = new JsonObject();
             limpocomando.addProperty("br", "Todo o seu inventário foi limpo!");
             limpocomando.addProperty("en", "Your entire inventory has been cleared!");
+            limpocomando.addProperty("es", "¡Todo tu inventario ha sido limpiado!");
+            limpocomando.addProperty("fr", "Tout votre inventaire a été nettoyé!");
+            limpocomando.addProperty("de", "Ihr gesamtes Inventar wurde geleert!");
             messages.add("limpo_comando", limpocomando);
-
-
-
-
 
 
 
