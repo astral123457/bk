@@ -43,6 +43,7 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
                   /limpar (limpar o inventário.)
+                  /addpermission (permisao ao jogador para esplorar o mundo)
 
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
