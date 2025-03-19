@@ -16,6 +16,9 @@ commands:
     description: Concede status de VIP a um jogador.
     usage: /addvip <nome_do_jogador>
     permission: vip.add
+  addpermission:
+    description: Concede permission a um jogador.
+    usage: /addpermission <nome_do_jogador>
   rmvip:
     description: Remove o status de VIP de um jogador.
     usage: /rmvip <nome_do_jogador>

