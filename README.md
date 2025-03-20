@@ -31,10 +31,14 @@ O modulo vip e caso voce queria dar um presente escolha uma Cor ?
 Rosa , Verde , Amarelo e Maron ai voce da /addvip <name>
 
        Digita o comando: 
-      /eva (para rosa) ou 
-      /lilth (para verde) ou
-      /emanuel (para amarela) ou
-     /adan (para maron)
+                        /eva (para rosa)
+      
+                        /lilth (para verde)
+                        
+                        /emanuel (para amarela)
+                        
+                       /adan (para maron)
+                       
      o admim pergunta pegou seu kit ? se sim voce da o comando /rmvip <name> para nao fica pegando sempre!
 
 
