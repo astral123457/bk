@@ -1,10 +1,11 @@
 # BK Kit básico de alimentação no inicio do Minecraft
 
-# Languem Support 
-# BR, EN, ES, FR, DE
-# RU, ZH, ZH-TW, JA
-# KO, IT, NL, PL, SV,
-# CS, HU, TR, AR, FI, DA
+# Languem Support
+
+BR, EN, ES, FR, DE
+RU, ZH, ZH-TW, JA
+KO, IT, NL, PL, SV,
+CS, HU, TR, AR, FI, DA
 
 Explicações:
 
