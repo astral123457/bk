@@ -7,7 +7,7 @@ RU, ZH, ZH-TW, JA
 KO, IT, NL, PL, SV,
 CS, HU, TR, AR, FI, DA
 
-Explicações:
+# Explicações:
 
 onEnable():
 
