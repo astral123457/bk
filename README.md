@@ -50,7 +50,7 @@ Gerencia o comando de /limpar o inventário.
 
 Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
-         Command: /oi
+         Command: /oi , /bk ou /kit
                   /vip
                   /addvip <name>
                   /rmvip <name>
