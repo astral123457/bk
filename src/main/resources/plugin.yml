@@ -9,6 +9,10 @@ website: http://bzmgames.infinityfreeapp.com/?i=1
 commands:
   oi:
     description: Diz 'bem vindo'
+  kit:
+    description: Diz 'bem vindo'
+  bk:
+    description: Diz 'bem vindo'
   vip:
     description: Kit Bk Basic Kit para VIPs
     permission: vip.use

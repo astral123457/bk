@@ -62,6 +62,8 @@ public final class Bk extends JavaPlugin implements Listener {
 
         // Registrar comandos
         getCommand("oi").setExecutor(this);
+        getCommand("kit").setExecutor(this);
+        getCommand("bk").setExecutor(this);
         getCommand("vip").setExecutor(this);
         getCommand("addvip").setExecutor(this);
         getCommand("addpermission").setExecutor(this);
@@ -134,7 +136,7 @@ public final class Bk extends JavaPlugin implements Listener {
         }
         MessageManager messageManager = new MessageManager(); // Gerenciador de mensagens
 
-        if (command.getName().equalsIgnoreCase("oi")) {
+        if (command.getName().equalsIgnoreCase("oi")||command.getName().equalsIgnoreCase("kit")||command.getName().equalsIgnoreCase("bk")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
