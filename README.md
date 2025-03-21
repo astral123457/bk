@@ -1,5 +1,7 @@
 # BK Kit básico de alimentação no inicio do Minecraft
 
+(OBS A VERSAO !.8 Esta com ERRO baixe a 1.7 eu Pretendo Atualizar...
+
 # Languem Support
 
 BR, EN, ES, FR, DE
