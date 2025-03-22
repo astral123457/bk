@@ -9,10 +9,6 @@ website: http://bzmgames.infinityfreeapp.com/?i=1
 commands:
   oi:
     description: Diz 'bem vindo'
-  kit:
-    description: Diz 'bem vindo'
-  bk:
-    description: Diz 'bem vindo'
   vip:
     description: Kit Bk Basic Kit para VIPs
     permission: vip.use
@@ -20,9 +16,6 @@ commands:
     description: Concede status de VIP a um jogador.
     usage: /addvip <nome_do_jogador>
     permission: vip.add
-  addpermission:
-    description: Concede permission a um jogador.
-    usage: /addpermission <nome_do_jogador>
   rmvip:
     description: Remove o status de VIP de um jogador.
     usage: /rmvip <nome_do_jogador>

@@ -1,15 +1,8 @@
 # BK Kit básico de alimentação no inicio do Minecraft
 
-(OBS A VERSAO !.8 Esta com ERRO baixe a 1.7 eu Pretendo Atualizar...
+# Languem Support BR, EN, ES, FR, DE
 
-# Languem Support
-
-BR, EN, ES, FR, DE
-RU, ZH, ZH-TW, JA
-KO, IT, NL, PL, SV,
-CS, HU, TR, AR, FI, DA
-
-# Explicações:
+Explicações:
 
 onEnable():
 
@@ -33,22 +26,6 @@ Verifica as permissões do jogador.
 
 Gerencia os kits dos vips.
 
-O modulo vip e caso voce queria dar um presente escolha uma Cor ?
-
-Rosa , Verde , Amarelo e Maron ai voce da /addvip <name>
-
-       Digita o comando: 
-                        /eva (para rosa)
-      
-                        /lilth (para verde)
-                        
-                        /emanuel (para amarela)
-                        
-                       /adan (para maron)
-                       
-     o admim pergunta pegou seu kit ? se sim voce da o comando /rmvip <name> para nao fica pegando sempre!
-
-
 Gerencia a adição e remoção de vips.
 
 Gerencia o comando de /limpar o inventário.
@@ -57,7 +34,7 @@ Gerencia o comando de /limpar o inventário.
 
 Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
-         Command: /oi , /bk ou /kit
+         Command: /oi
                   /vip
                   /addvip <name>
                   /rmvip <name>
@@ -66,7 +43,6 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
                   /limpar (limpar o inventário.)
-                  /addpermission (permisao ao jogador para explorar o mundo)
 
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
