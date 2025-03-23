@@ -20,6 +20,9 @@ commands:
     description: Remove o status de VIP de um jogador.
     usage: /rmvip <nome_do_jogador>
     permission: vip.add
+  aion:
+    description: Kit aion para VIPs
+    permission: vip.use
   emanuel:
     description: Kit Emanuel para VIPs
     permission: vip.use

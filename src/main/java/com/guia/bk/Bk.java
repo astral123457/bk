@@ -70,7 +70,7 @@ public final class Bk extends JavaPlugin implements Listener {
         getCommand("lilith").setExecutor(this);
         getCommand("eva").setExecutor(this);
         getCommand("adan").setExecutor(this);
-
+        getCommand("aion").setExecutor(this);
         getCommand("limpar").setExecutor(this);
 
 
@@ -265,6 +265,96 @@ public final class Bk extends JavaPlugin implements Listener {
 
                     // Adicionar as armaduras na Shulker Box
                     shulker.getInventory().addItem(helmet, chestplate, leggings, boots);
+
+                    // Adicionar diamantes na Shulker Box
+                    for (int i = 0; i < 14; i++) {
+                        shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));
+                    }
+                    shulker.getInventory().addItem(new ItemStack(Material.DIAMOND, 52));
+
+                    // Criar a picareta especial encantada
+                    ItemStack pickaxe = new ItemStack(Material.NETHERITE_PICKAXE, 1);
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("DIG_SPEED"), 5); // Eficiência V
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("DURABILITY"), 3); // Inquebrável III
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1); // Remendo
+                    pickaxe.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_BLOCKS"), 3); // Fortuna III
+
+                    // Adicionar a picareta encantada na Shulker Box
+                    shulker.getInventory().addItem(pickaxe);
+
+                    // Salvar e aplicar as mudanças na Shulker Box
+                    meta.setBlockState(shulker);
+                    shulkerBox.setItemMeta(meta);
+
+                    // Adicionar a Shulker Box ao inventário do jogador
+                    player.getInventory().addItem(shulkerBox);
+
+                } else {
+                    sender.sendMessage(ChatColor.RED + messageManager.getMessage("no_permission", language));
+                }
+                return true;
+            } else {
+                sender.sendMessage(ChatColor.RED + messageManager.getMessage("jogador_comando", language));
+                return true;
+            }
+        }
+
+
+        else if (command.getName().equalsIgnoreCase("aion")) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                if (player.hasPermission("vip.use")) {
+                    sender.sendMessage(ChatColor.AQUA + messageManager.getMessage("aion_comando", language));
+
+                    // Criar a Shulker Box amarela
+                    ItemStack shulkerBox = new ItemStack(Material.BLUE_SHULKER_BOX);
+                    BlockStateMeta meta = (BlockStateMeta) shulkerBox.getItemMeta();
+                    ShulkerBox shulker = (ShulkerBox) meta.getBlockState();
+
+                    // Adicionar os itens na Shulker Box
+                    shulker.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 40));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 64));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 36));
+                    shulker.getInventory().addItem(new ItemStack(Material.EMERALD, 12));
+                    shulker.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, 1));
+                    shulker.getInventory().addItem(new ItemStack(Material.COAL, 40));
+                    shulker.getInventory().addItem(new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 2));
+                    shulker.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 5));
+
+                    // Criar o capacete de Netherite
+                    ItemStack helmet = new ItemStack(Material.NETHERITE_HELMET, 1);
+                    helmet.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
+                    helmet.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+                    helmet.addUnsafeEnchantment(Enchantment.MENDING, 1);
+
+                    // Criar outras peças de armadura de Netherite
+                    ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE, 1);
+                    chestplate.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
+                    chestplate.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+                    chestplate.addUnsafeEnchantment(Enchantment.MENDING, 1);
+
+                    ItemStack leggings = new ItemStack(Material.NETHERITE_LEGGINGS, 1);
+                    leggings.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
+                    leggings.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+                    leggings.addUnsafeEnchantment(Enchantment.MENDING, 1);
+
+                    ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS, 1);
+                    boots.addUnsafeEnchantment(Enchantment.getByName("PROTECTION_ENVIRONMENTAL"), 4);
+                    boots.addUnsafeEnchantment(Enchantment.UNBREAKING, 3);
+                    boots.addUnsafeEnchantment(Enchantment.MENDING, 1);
+                    boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
+
+                    // Criar uma espada de Netherite
+                    ItemStack sword = new ItemStack(Material.NETHERITE_SWORD, 1);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("DAMAGE_ALL"), 5);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("UNBREAKING"), 3);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("FIRE_ASPECT"), 2);
+                    sword.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_MOBS"), 3);
+
+
+                    // Adicionar as armaduras na Shulker Box
+                    shulker.getInventory().addItem(helmet, chestplate, leggings, boots, sword);
 
                     // Adicionar diamantes na Shulker Box
                     for (int i = 0; i < 14; i++) {
@@ -754,6 +844,14 @@ public final class Bk extends JavaPlugin implements Listener {
             emanuelcomando.addProperty("fr", "§b§lXAΓ§6, Christ stratégie de tarification, échelle, série d'idées, une étoile, un mâle dominant!");
             emanuelcomando.addProperty("de", "§b§lXAΓ§6, Christus Preisstrategie, Skala, Ideenreihe, ein Stern, ein dominantes Männchen!");
             messages.add("emanuel_comando", emanuelcomando);
+
+            JsonObject aioncomando = new JsonObject();
+            aioncomando.addProperty("br", "§b§lαἰών§6, Divindade, tempo, vida e eternidade!");
+            aioncomando.addProperty("en", "§b§lαἰών§6, Divinity, time, life and eternity!!");
+            aioncomando.addProperty("es", "§b§lαἰών§6, ¡Divinidad, tiempo, vida y eternidad!!");
+            aioncomando.addProperty("fr", "§b§lαἰών§6, Divinité, temps, vie et éternité !!");
+            aioncomando.addProperty("de", "§b§lαἰών§6, Göttlichkeit, Zeit, Leben und Ewigkeit!!");
+            messages.add("aion_comando", aioncomando);
 
             JsonObject lilithcomando = new JsonObject();
             lilithcomando.addProperty("br", "§b§lΘΕ§6, Consciência emocional é pequena e leva a Morte Princesa Lilith");
