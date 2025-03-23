@@ -39,6 +39,7 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /addvip <name>
                   /rmvip <name>
                   /lilith (kit Bruxa)
+                  /aion (Cajado que abre o mar)
                   /emanuel (kit stive Apocaliptico)
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
@@ -86,6 +87,8 @@ graph TD;
     /lilith-->Fim;
     adicionarItemVIP-->/emanuel;
     /emanuel-->Fim;
+    adicionarItemVIP-->/aion;
+    /aion-->Fim;
     adicionarItemVIP-->/eva;
     /eva-->Fim;
     adicionarItemVIP-->/adan;
