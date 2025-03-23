@@ -94,4 +94,6 @@ graph TD;
     /limpar-->Fim;
     Rm-->Fim;
 ```
+![image](https://github.com/user-attachments/assets/ccc83247-cb0c-4d0b-bb46-2fc44f5c2682)
+
 
