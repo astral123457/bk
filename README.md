@@ -39,7 +39,6 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
                   /addvip <name>
                   /rmvip <name>
                   /lilith (kit Bruxa)
-                  /aion (Cajado que abre o mar)
                   /emanuel (kit stive Apocaliptico)
                   /eva (kit rainha do mar)
                   /adan (kit escravo da terra)
@@ -87,8 +86,6 @@ graph TD;
     /lilith-->Fim;
     adicionarItemVIP-->/emanuel;
     /emanuel-->Fim;
-    adicionarItemVIP-->/aion;
-    /aion-->Fim;
     adicionarItemVIP-->/eva;
     /eva-->Fim;
     adicionarItemVIP-->/adan;
@@ -97,16 +94,4 @@ graph TD;
     /limpar-->Fim;
     Rm-->Fim;
 ```
-A palavra aion (αἰών) é uma palavra grega que pode significar "vida", "eternidade", "tempo", "mundo", "era", "período de tempo". 
-Na mitologia 
-Aion é uma divindade helenística associada ao tempo, ao zodíaco, ao orbe que abrange o universo.
-Aion é um deus das eras cíclicas, do ciclo do ano e do zodíaco.
-
-![image](https://github.com/user-attachments/assets/ccc83247-cb0c-4d0b-bb46-2fc44f5c2682)
-
-
-![images](https://github.com/user-attachments/assets/323406b2-1405-4b46-8bcd-f4bb22300332)
-
-
-
 

@@ -344,17 +344,17 @@ public final class Bk extends JavaPlugin implements Listener {
                     boots.addUnsafeEnchantment(Enchantment.MENDING, 1);
                     boots.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, 3);
 
-                    // Criar uma espada de Netherite
-                    ItemStack sword = new ItemStack(Material.NETHERITE_SWORD, 1);
-                    sword.addUnsafeEnchantment(Enchantment.getByName("DAMAGE_ALL"), 5);
-                    sword.addUnsafeEnchantment(Enchantment.getByName("UNBREAKING"), 3);
-                    sword.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1);
-                    sword.addUnsafeEnchantment(Enchantment.getByName("FIRE_ASPECT"), 2);
-                    sword.addUnsafeEnchantment(Enchantment.getByName("LOOT_BONUS_MOBS"), 3);
+                    // Criar um tridente especial encantado
+                    ItemStack trident = new ItemStack(Material.TRIDENT, 1);
+                    trident.addUnsafeEnchantment(Enchantment.getByName("IMPALING"), 5); // Perfuração V
+                    trident.addUnsafeEnchantment(Enchantment.getByName("UNBREAKING"), 3); // Inquebrável III
+                    trident.addUnsafeEnchantment(Enchantment.getByName("MENDING"), 1); // Remendo
+                    trident.addUnsafeEnchantment(Enchantment.getByName("LOYALTY"), 3); // Lealdade III
+                    trident.addUnsafeEnchantment(Enchantment.getByName("CHANNELING"), 1); // Canalização
 
 
                     // Adicionar as armaduras na Shulker Box
-                    shulker.getInventory().addItem(helmet, chestplate, leggings, boots, sword);
+                    shulker.getInventory().addItem(helmet, chestplate, leggings, boots, trident);
 
                     // Adicionar diamantes na Shulker Box
                     for (int i = 0; i < 14; i++) {
