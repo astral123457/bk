@@ -1,4 +1,4 @@
-BK – Basic Food Kit Plugin for Minecraft
+# BK – Basic Food Kit Plugin for Minecraft
 Enhance the early-game experience in Minecraft with BK Kit, a plugin designed to provide players with essential food resources upon starting their journey.
 Language Support:
 Supported languages: BR, EN, ES, FR, DE.
