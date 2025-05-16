@@ -33,19 +33,15 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
 
-# Testamento de (Z) or (D) Z.eus aos 4
+Testament of (Z) or (D) Z.eus to the Four
 
-XAΓ O Chi Rho é formado pela combinação das duas primeiras letras da palavra grega Christos, 
-que significa "Cristo".  estratégia de precificação, escala, série de ideias,  uma estrela, um macho dominante
+XAΓ – The Chi Rho symbol is formed by combining the first two letters of the Greek word Christos, meaning "Christ." It represents a pricing strategy, scaling, a series of ideas, a star, and a dominant male figure.
 
+ΘΕ – Emotional consciousness is small and leads to death (LILITH).
 
-ΘΕ Consciência emocional é pequena e leva a Morte (LILITH)
+ΔΙ – Latino "Small" (Adam, the clay man).
 
-
-ΔΙ LAtino Pequeno (Homen Barro Adão)
-
-
-ΣΚ Lesbica Feminista é uma criatura aquática, semelhante a uma tartaruga, que habita rios e lagos ( EVA e Seus pecados Do mundo)
+ΣΚ – Lesbian feminist is an aquatic creature, similar to a turtle, inhabiting rivers and lakes (EVA and her sins of the world).
 
 ![image](https://github.com/user-attachments/assets/5a6795d7-de8a-4000-8003-b51297295103)
 
