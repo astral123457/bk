@@ -33,7 +33,7 @@ Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 ![image](https://github.com/user-attachments/assets/53654929-c8c6-496d-8387-777ece188616)
 
 
-Testament of (Z) or (D) Z.eus to the Four
+# Testament of (Z) or (D) Z.eus to the Four
 
 XAΓ – The Chi Rho symbol is formed by combining the first two letters of the Greek word Christos, meaning "Christ." It represents a pricing strategy, scaling, a series of ideas, a star, and a dominant male figure.
 
