@@ -76,4 +76,7 @@ graph TD;
     /limpar-->Fim;
     Rm-->Fim;
 ```
+![Uploading Gemini_Generated_Image_q67f6rq67f6rq67f.jpeg…]()
+
+
 
