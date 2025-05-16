@@ -1,36 +1,22 @@
-# BK Kit básico de alimentação no inicio do Minecraft
-
-# Languem Support BR, EN, ES, FR, DE
-
-Explicações:
-
+BK – Basic Food Kit Plugin for Minecraft
+Enhance the early-game experience in Minecraft with BK Kit, a plugin designed to provide players with essential food resources upon starting their journey.
+Language Support:
+Supported languages: BR, EN, ES, FR, DE.
+Functionality Overview:
 onEnable():
-
-Inicializa o plugin, carrega configurações, registra eventos e comandos.
-
-Verifica se o plugin está habilitado na configuração e, se não, o desativa.
-
+- Initializes the plugin, loads configurations, registers events and commands.
+- Checks if the plugin is enabled—if not, it automatically deactivates.
 onDisable():
-
-Desabilita o plugin.
-
-Adiciona itens ao inventário do jogador, limitando a 3 vezes.
-
-Realiza verificações de permissão e argumentos.
-
-Executa ações diferentes dependendo do comando.
-
-Verifica se o jogador que executou o comando é um jogador ou o console.
-
-Verifica as permissões do jogador.
-
-Gerencia os kits dos vips.
-
-Gerencia a adição e remoção de vips.
-
-Gerencia o comando de /limpar o inventário.
-
-
+- Disables the plugin when necessary.
+- Adds food items to the player's inventory (limited to 3 times).
+- Performs permission and argument checks.
+- Executes different actions based on the command entered.
+- Identifies whether the command was executed by a player or the console.
+- Manages player permissions and VIP kits.
+- Handles VIP additions and removals.
+- Allows players to use /limpar to clear their inventory.
+Dependencies:
+This plugin requires LuckPerms-Bukkit-5.4.156 for proper permission handling.
 
 Dependencia LuckPerms-Bukkit-5.4.156 https://luckperms.net/
 
