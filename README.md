@@ -76,7 +76,7 @@ graph TD;
     /limpar-->Fim;
     Rm-->Fim;
 ```
-![Uploading Gemini_Generated_Image_q67f6rq67f6rq67f.jpeg…]()
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H411P12P)
 
 
 
